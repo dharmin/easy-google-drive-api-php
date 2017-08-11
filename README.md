@@ -97,7 +97,7 @@ $folderId = $google->createFolder($parentFolderId,$folderName);
  *  @return array list of files or folders or both from given parent directory
  */
 $list = listFilesFolders($search,$parentId,$type='all');
-    ```
+```
 
 
 #### Todos
