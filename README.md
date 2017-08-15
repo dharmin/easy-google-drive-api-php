@@ -47,8 +47,8 @@ require_once 'google.php'; // Include Class File
 session_start(); //Start the session
 $google = new GoogleClient(); //Create GoogleClient Object
 
-// Check if session is not started
-if(!isset($_SESSION['GOOGLE_ACCESS_TOKEN'])){ 
+// Check if the user is logged in
+if(!$google->isLoggedIn()){ 
     // Go to Google Login Page
 	header('Location: '.$google->getAuthURL());
 	exit;
