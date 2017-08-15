@@ -13,6 +13,11 @@ Fast and easy to use Google Drive API for PHP.
   - Easy to setup;
   - Create Folders,Upload files,List files or folders by just calling simple function.
 
+#### (v0.2) (15/08/2017)
+
+  - Refresh Token added for long lived session
+  - isLoggedIn() method added to check access token is available without accessing session variables
+
 
 ### Installation
 
