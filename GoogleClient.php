@@ -29,7 +29,7 @@ class GoogleClient
             //  Checking current access token is expired
             if($this->client->isAccessTokenExpired()){
                 // Refresh access token and add it into session
-                $client->refreshToken($_SESSION['GOOGLE_REFRESH_TOKEN']);
+                $this->client->refreshToken($_SESSION['GOOGLE_REFRESH_TOKEN']);
                 $access_token = $this->client->getAccessToken();
                 $_SESSION['GOOGLE_ACCESS_TOKEN'] = $access_token;
             }
@@ -56,7 +56,7 @@ class GoogleClient
     {
         $this->client->authenticate($code);
         $_SESSION['GOOGLE_ACCESS_TOKEN'] = $this->client->getAccessToken();
-        $_SESSION['GOOGLE_REFRESH_TOKEN'] =  $this->client->getRefreshToken();
+        $_SESSION['GOOGLE_REFRESH_TOKEN'] =  $this->client->refreshToken($code);
     }
 
     /**
@@ -91,7 +91,7 @@ class GoogleClient
      */
     public function initDriveService()
     {
-        $this->service = new \Google_Service_Drive($this->client);
+        $this->service = new \Soramugi\GoogleDrive\Service($this->client);
     }
 
     /**
@@ -103,7 +103,7 @@ class GoogleClient
     public function createFolder($parentId, $folderName)
     {
         // Setting File Matadata
-        $fileMetadata = new \Google_Service_Drive_DriveFile(array(
+        $fileMetadata = new \Soramugi\GoogleDrive\File(array(
             'name' => $folderName,
             'parents' => array($parentId),
             'mimeType' => 'application/vnd.google-apps.folder'));
@@ -185,7 +185,7 @@ class GoogleClient
         }
 
         // Creating file matadata
-        $fileMetadata = new \Google_Service_Drive_DriveFile(array(
+        $fileMetadata = new \Soramugi\GoogleDrive\File(array(
             'name' => $fileName,
             'parents' => array($parentId)
         ));
